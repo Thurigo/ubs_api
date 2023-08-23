@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser'); // Corrigido
 const cors = require('cors');
 
-const uri = 'mongodb+srv://Clientes_Rep:1234@cluster0.3t7tdvt.mongodb.net/?retryWrites=true&w=majority'; // Insira a URI do MongoDB
+const uri = 'mongodb+srv://ubs:1234@ubs-cluster.lvn4rik.mongodb.net/?retryWrites=true&w=majority'; // Insira a URI do MongoDB
 const client = new MongoClient(uri, {
     serverApi: {
         version: ServerApiVersion.v1,
