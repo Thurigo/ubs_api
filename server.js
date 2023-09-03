@@ -60,6 +60,24 @@ app.get('/all-ubs', async (req, res) => {
     }
 });
 
+
+app.get('/all-agendas', async (req, res) => {
+    try{
+        await client.connect();
+
+        const ubs = await agendaCollection.find({}).toArray();
+
+        console.log('pesquisando Agenda');
+        res.json(ubs);
+
+        await client.close();
+    }catch (error){
+        console.error(error);
+        res.status(500).json({error:'Ocorreu um erro durante a consulta'});
+    }
+});
+
+
 app.post('/criaragenda', async (req, res) => {
     const {
         Medico,
