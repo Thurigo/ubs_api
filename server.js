@@ -1,9 +1,9 @@
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const express = require('express');
-const bodyParser = require('body-parser'); // Corrigido
+const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const uri = 'mongodb+srv://ubs:1234@ubs-cluster.lvn4rik.mongodb.net/?retryWrites=true&w=majority'; // Insira a URI do MongoDB
+const uri = 'mongodb+srv://ubs:1234@ubs-cluster.lvn4rik.mongodb.net/?retryWrites=true&w=majority'; 
 const client = new MongoClient(uri, {
     serverApi: {
         version: ServerApiVersion.v1,
@@ -13,9 +13,10 @@ const client = new MongoClient(uri, {
 });
 
 const consulta = client.db('UBS');
-const postinhoCollection = consulta.collection('postinho'); // Corrigido
-const agendaCollection = consulta.collection('agenda'); // Corrigido
-const perfilCollection = consulta.collection('perfil'); // Corrigido
+const postinhoCollection = consulta.collection('postinho');
+const agendaCollection = consulta.collection('agenda_consulta');
+const perfilCollection = consulta.collection('perfil');
+const remedioCollection = consulta.collection('remedio');
 
 const app = express();
 app.use(bodyParser.json());
@@ -72,6 +73,22 @@ app.get('/all-agendas', async (req, res) => {
 
         await client.close();
     }catch (error){
+        console.error(error);
+        res.status(500).json({error:'Ocorreu um erro durante a consulta'});
+    }
+});
+
+app.get('/all-remedio', async (req, res) => {
+    try{
+        await client.connect();
+        
+        const ubs = await remedioCollection.find({}).toArray();
+
+        console.log('pesquisando remedio');
+        res.json(ubs);
+
+        await client.close();
+    }catch(error){
         console.error(error);
         res.status(500).json({error:'Ocorreu um erro durante a consulta'});
     }
