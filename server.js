@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/login', async (req, res) => {
-    const { usuario, senha } = req.body;
+    const { usuario, senha } = req.query;
 
     try {
         await client.connect();
