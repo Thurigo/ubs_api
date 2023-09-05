@@ -45,6 +45,36 @@ app.get('/login', async (req, res) => {
     }
 });
 
+
+app.get('/pesquisa_remedio', async (req, res) => {
+    const{remedio} = req.query;
+    
+    try {
+        await client.connect();
+
+        console.log('Pesquiando remedio')
+
+        const regex = new RegExp(remedio, 'i');
+        const resultado = await remedioCollection.find({ nome: { $regex: regex } }).toArray();
+
+
+        console.log('pesquisando do remedio')
+        res.json(resultado);
+
+        await client.close();
+
+
+
+    }catch(error){
+        console.error(error);
+        res.status(500).json({error: 'Ocorreu um erro durante a consulta'})
+    }
+
+
+});
+
+
+
 app.get('/all-ubs', async (req, res) => {
     try {
         await client.connect();
