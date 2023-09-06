@@ -5,11 +5,12 @@ const agenda = {
     Medico: 'nome do medico',
     Paciente: 'nome do paciente',
     ubs:{Area:'Nome da area'},
-    Data:'data;',
+    Data:'11/09/2001',
     Medicamento:'nome do medicamento',
     Receita:'nome da receita',
     Descrição:'descri',
-    Token:'Token'
+    Token:'Token',
+    Valida:true
 };
 
 const apiUrl = 'http://localhost:3000/criaragenda';

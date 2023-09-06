@@ -134,7 +134,8 @@ app.post('/criaragenda', async (req, res) => {
         Medicamento,
         Receita,
         Descrição,
-        Token
+        Token,
+        Valida
     } = req.body;
 
     try {
@@ -142,11 +143,12 @@ app.post('/criaragenda', async (req, res) => {
             medico: Medico,
             paciente: Paciente,
             ubs: { Area },
-            data: Data,
+            data: new Date(Data),
             medicamento: Medicamento,
             receita: Receita,
             descrição: Descrição,
-            token: Token
+            token: Token,
+            valida: Valida
         };
 
         const new_agenda = await agendaCollection.insertOne(novaAgenda);
