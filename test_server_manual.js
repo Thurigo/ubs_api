@@ -15,7 +15,7 @@ const agenda = {
 
 const apiUrl = 'http://localhost:3000/criaragenda';
 
-
+function fazerPostagenda(){
 axios.post(apiUrl,agenda)
     .then(reponse =>  {
         console.log('Resposta APi', response.agenda);
@@ -23,3 +23,18 @@ axios.post(apiUrl,agenda)
     }).catch(error => {
         console.error('erro da api' ,error);
     });
+}
+
+// fazerPostagenda
+
+function fazerupadate_date() {
+    axios.get('http://localhost:3000/all-agendas')
+      .then(response => {
+        console.log('Resposta API', response.data);
+      })
+      .catch(error => {
+        console.error('Erro de API', error);
+      });
+  }
+
+  module.exports = { fazerupadate_date };
