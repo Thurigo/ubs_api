@@ -13,14 +13,20 @@ async function agendarChamadaAxios() {
     (dateNow.getHours() === 23 &&
       (dateNow.getMinutes() === 51 || dateNow.getMinutes() === 7) &&
       dateNow.getSeconds() === 2)
-    // ||i === 1 
+     ||i === 1 
   ) {
     const agenda = await test.fazerupadate_date();
     console.log('teste');
-    //console.log(agenda);
+    console.log(agenda);
 
     agenda.forEach(element => {
-      console.log('123', element);
+      
+      if(Date.parse(element.data) > dateNow){  
+        console.log(Date.parse(element.data));
+      }else{
+        console.log('agenda valida')
+      }
+
   });
 
 

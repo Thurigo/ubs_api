@@ -124,6 +124,28 @@ app.get('/all-remedio', async (req, res) => {
     }
 });
 
+app.patch('/atualiza-auto-agenda/:id', async (req, res) => {
+    const id = req.params.id;
+    
+    try {
+        await client.connect();
+        
+        const ubs = await agendaCollection.updateOne({_id: new ObjectId(id)}, {$set: {valida: false}}); 
+
+        if (result.modifiedCount > 0) {
+            res.status(200).json({ message: 'Dados atualizados com sucesso.' });
+          } else {
+            res.status(404).json({ message: 'Nenhum documento encontrado para atualização.' });
+          }
+      
+          await client.close();
+        } catch (error) {
+          console.error(error);
+          res.status(500).json({ error: 'Ocorreu um erro durante a atualização dos dados.' });
+        }
+      });
+
+
 
 app.post('/criaragenda', async (req, res) => {
     const {
