@@ -10,35 +10,20 @@ async function agendarChamadaAxios() {
   const dateNow = new Date();
 
   if (
-    (dateNow.getHours() === 23 &&
-      (dateNow.getMinutes() === 51 || dateNow.getMinutes() === 7) &&
+    (dateNow.getHours() === 18 &&
+      (dateNow.getMinutes() === 2 || dateNow.getMinutes() === 5) &&
       dateNow.getSeconds() === 2)
      ||i === 1 
   ) {
     const agenda = await test.fazerupadate_date();
-    console.log('teste');
-    console.log(agenda);
+   
+}
 
-    agenda.forEach(element => {
-      
-      if(Date.parse(element.data) > dateNow){  
-        console.log(Date.parse(element.data));
-      }else{
-        console.log('agenda valida')
-      }
-
-  });
-
-
-  }
-
-  setTimeout(agendarChamadaAxios, 1000);
+setTimeout(agendarChamadaAxios, 10000);
 }
 
 agendarChamadaAxios();
-
-
-
-
+//test.fazerPostagenda();
+//test.fazerUpdateAgendaValida('6504b682d27df1dc5617bb35')
 
 

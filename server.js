@@ -108,6 +108,31 @@ app.get('/all-agendas', async (req, res) => {
     }
 });
 
+app.patch('/update_valida_agenda/:id', async (req,res) => {
+    const id = req.params.id;
+
+    try{
+        await client.connect();
+
+        const result = await agendaCollection.updateOne(
+            {_id: new ObjectId(id)},
+            {$set:{valida: false}}
+        
+        )
+
+        if (result.modifiedCount > 0) {
+            res.status(200).json({ message: 'Dados atualizados com sucesso.' });
+          } else {
+            res.status(404).json({ message: 'Nenhum documento encontrado para atualização.' });
+          }
+      
+          await client.close();
+    }catch (error)  {
+        console.error(error)
+        res.status(500).json({ error: 'Ocorreu um erro durante a atualização dos dados.' });
+    }
+});
+
 app.get('/all-remedio', async (req, res) => {
     try{
         await client.connect();
@@ -123,28 +148,6 @@ app.get('/all-remedio', async (req, res) => {
         res.status(500).json({error:'Ocorreu um erro durante a consulta'});
     }
 });
-
-app.patch('/atualiza-auto-agenda/:id', async (req, res) => {
-    const id = req.params.id;
-    
-    try {
-        await client.connect();
-        
-        const ubs = await agendaCollection.updateOne({_id: new ObjectId(id)}, {$set: {valida: false}}); 
-
-        if (result.modifiedCount > 0) {
-            res.status(200).json({ message: 'Dados atualizados com sucesso.' });
-          } else {
-            res.status(404).json({ message: 'Nenhum documento encontrado para atualização.' });
-          }
-      
-          await client.close();
-        } catch (error) {
-          console.error(error);
-          res.status(500).json({ error: 'Ocorreu um erro durante a atualização dos dados.' });
-        }
-      });
-
 
 
 app.post('/criaragenda', async (req, res) => {
@@ -179,6 +182,8 @@ app.post('/criaragenda', async (req, res) => {
         console.log(`Contato inserido: ${new_agenda.insertedId}`);
 
         res.json({ message: 'Agenda criada com sucesso!' });
+        await client.close();
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Ocorreu um erro durante a consulta.' });
