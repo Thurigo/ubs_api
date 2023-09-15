@@ -40,5 +40,23 @@ async function fazerupadate_date() {
     };
     return [];
 }
+async function fazerUpdateAgendaValida(id) {
+    try {
+        
+        const apiUrl = `http://localhost:3000/update_valida_agenda/${id}`;
+        
+        const response = await axios.patch(apiUrl, { valida: false });
+      
+      if (response.status === 200) {
+          console.log('Agenda atualizada com sucesso.');
+      } else if (response.status === 404) {
+          console.log('Nenhum documento encontrado para atualização.');
+        } else {
+            console.log('Erro desconhecido durante a atualização.');
+      }
+    } catch (error) {
+        console.error('Erro de API', error);
+    }
+}
 
 module.exports = { fazerupadate_date , fazerPostagenda, fazerUpdateAgendaValida};
