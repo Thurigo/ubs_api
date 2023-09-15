@@ -16,7 +16,21 @@ async function agendarChamadaAxios() {
      ||i === 1 
   ) {
     const agenda = await test.fazerupadate_date();
-   
+    //console.log('teste');
+    // console.log(agenda);
+
+   // test.fazerUpdateAgendaValida('65023dd66c0e42762e77b406');
+
+
+   for (const element of agenda) {
+    if (Date.parse(element.data) < dateNow) {
+      console.log(Date.parse(element.data));
+      const result = await test.fazerUpdateAgendaValida(element._id);
+      console.log(result);
+    } else {
+      console.log('Data valida');
+    }
+  }
 }
 
 setTimeout(agendarChamadaAxios, 10000);
