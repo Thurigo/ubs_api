@@ -164,6 +164,7 @@ app.post('/criaragenda', async (req, res) => {
     } = req.body;
 
     try {
+
         const novaAgenda = {
             medico: Medico,
             paciente: Paciente,
@@ -175,7 +176,8 @@ app.post('/criaragenda', async (req, res) => {
             token: Token,
             valida: Valida
         };
-
+        
+        await client.connect();
         const new_agenda = await agendaCollection.insertOne(novaAgenda);
 
         console.log('Agenda Criada com sucesso!');
