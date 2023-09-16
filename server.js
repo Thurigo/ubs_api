@@ -133,6 +133,31 @@ app.patch('/update_valida_agenda/:id', async (req,res) => {
     }
 });
 
+
+app.patch('/upade_atualizaDia/:id', async (req,res) => {
+    const id = req.params.ed;
+    const DataNova = req.body;
+
+    try{
+        await client.connect();
+
+        const atualizado = await agendaCollection.updateOne(
+            {_id: new ObjectId(id)},
+            {$set:{data:DataNova}}
+        );
+        if(atualizado.modifiedCount > 0){
+            res.status(200).json({message: 'Dados Atualizados'});
+        }else{
+            res.status(404).json({message:'nenhum documento encontrado'});
+        }
+
+        await client.close();
+    }catch(error){
+        console.error(error);
+        res.status(500).json({error:'Ocorreu um erro durante a atualização dos dados'})
+    }
+});
+
 app.get('/all-remedio', async (req, res) => {
     try{
         await client.connect();
