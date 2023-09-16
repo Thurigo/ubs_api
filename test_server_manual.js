@@ -40,7 +40,7 @@ function fazerPostagenda() {
         
         const apiUrl = `http://localhost:3000/editar-agenda-final/${id}`;
 
-        const response =await axios.patch(apiUrl,agenda )
+        const response =await axios.patch(apiUrl,agenda );
         console.log(response.data);
 
     } catch (error) {
@@ -49,7 +49,25 @@ function fazerPostagenda() {
     }
   }
 
-Editar_final_agenda('65055e7854b7b0c2098fc295');
+//Editar_final_agenda('65055e7854b7b0c2098fc295');
+
+async function editar_dia_agenda (id){
+    Dia = '9/15/2023';
+    
+    try{
+
+        const apiUrl = `http://localhost:3000/upade_atualizaDia/${id}`;
+
+        const response = await axios.patch(apiUrl, {data: Dia});
+        console.log(response.data)
+
+
+    }catch(error){
+        console.error('Erro de Api',error);
+    }  
+}
+
+editar_dia_agenda('65055d39f092db4416854868');
 
 async function fazerupadate_date() {
     try {

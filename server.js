@@ -135,7 +135,7 @@ app.patch('/update_valida_agenda/:id', async (req,res) => {
 
 
 app.patch('/upade_atualizaDia/:id', async (req,res) => {
-    const id = req.params.ed;
+    const id = req.params.id;
     const DataNova = req.body;
 
     try{
@@ -143,7 +143,7 @@ app.patch('/upade_atualizaDia/:id', async (req,res) => {
 
         const atualizado = await agendaCollection.updateOne(
             {_id: new ObjectId(id)},
-            {$set:{data:DataNova}}
+            {$set:{data: DataNova}}
         );
         if(atualizado.modifiedCount > 0){
             res.status(200).json({message: 'Dados Atualizados'});
