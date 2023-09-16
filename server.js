@@ -149,7 +149,7 @@ app.get('/all-remedio', async (req, res) => {
     }
 });
 
-app.patch('/editar-agenda-final:id', async (req, res) => {
+app.patch('/editar-agenda-final/:id', async (req, res) => {
   const id = req.params.id
   const {
     Medicamento,
