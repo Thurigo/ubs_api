@@ -5,7 +5,7 @@ const agenda = {
     Medico: 'nome do medico',
     Paciente: 'nome do paciente',
     ubs: { Area: 'Nome da area' },
-    Data: '25/15/2023',
+    Data: '25/15/2023', // Data em formato Americano
     Medicamento: 'nome do medicamento',
     Receita: 'nome da receita',
     Descrição: 'descri',

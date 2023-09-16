@@ -24,9 +24,9 @@ async function agendarChamadaAxios() {
 
 
    for (const element of agenda) {
-    if (Date.parse(element.data) < dateNow) {
+    if (Date.parse(element.data) < dateNow && element.valida == true) {
      // console.log(Date.parse(element.data));
-      const result = await test.fazerUpdateAgendaValida(element._id);
+       const result = await test.fazerUpdateAgendaValida(element._id);
       console.log(result);
     } else {
       console.log('Data valida');
@@ -37,7 +37,7 @@ async function agendarChamadaAxios() {
     
     // Cria uma cópia da data atual
     const dataAtualMaisUmDia = new Date(dataAtual);
-    dataAtualMaisUmDia.setDate(dataAtualMaisUmDia.getDate() + 1);
+    dataAtualMaisUmDia.setDate(dataAtualMaisUmDia.getDate() - 1);
     
     if (dataElement.getDate() === dataAtualMaisUmDia.getDate() &&
         dataElement.getMonth() === dataAtualMaisUmDia.getMonth() &&
@@ -57,10 +57,10 @@ async function agendarChamadaAxios() {
 setTimeout(agendarChamadaAxios, 10000);
 }
 
-//agendarChamadaAxios();
+agendarChamadaAxios();
 
 
-test.fazerPostagenda();
+// test.fazerPostagenda();
 //test.fazerUpdateAgendaValida('6504b682d27df1dc5617bb35')
 
 
