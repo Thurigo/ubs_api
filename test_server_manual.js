@@ -1,21 +1,22 @@
 const axios = require('axios');
 const { response } = require('express');
+const res = require('express/lib/response');
 
-const agenda = {
-    Medico: 'nome do medico',
-    Paciente: 'nome do paciente',
-    ubs: { Area: 'Nome da area' },
-    Data: '25/15/2023', // Data em formato Americano
-    Medicamento: 'nome do medicamento',
-    Receita: 'nome da receita',
-    Descrição: 'descri',
-    Token: 'Token',
-    Valida: true
-};
 
-const apiUrl = 'http://localhost:3000/criaragenda';
 
 function fazerPostagenda() {
+    const agenda = {
+        Medico: 'nome do medico',
+        Paciente: 'nome do paciente',
+        ubs: { Area: 'Nome da area' },
+        Data: '9/15/2023', // Data em formato Americano
+        Medicamento: 'nome do medicamento',
+        Receita: 'nome da receita',
+        Descrição: 'descri',
+        Token: 'Token',
+        Valida: true
+    };
+    const apiUrl = 'http://localhost:3000/criaragenda';
     axios.post(apiUrl, agenda)
         .then(response => {
             console.log('Resposta da API', response.data);
@@ -26,6 +27,29 @@ function fazerPostagenda() {
 }
 
   //fazerPostagenda();
+
+  async function Editar_final_agenda (id){
+    const agenda = {
+        Medicamento: 'nome do arthur',
+        Receita: 'nome da arthur',
+        Descrição: 'descri',
+        Valida: false
+    };
+
+    try{
+        
+        const apiUrl = `http://localhost:3000/editar-agenda-final/${id}`;
+
+        const response =await axios.patch(apiUrl,agenda )
+        console.log(response.data);
+
+    } catch (error) {
+
+        console.error('Erro de API', error);
+    }
+  }
+
+Editar_final_agenda('65055e7854b7b0c2098fc295');
 
 async function fazerupadate_date() {
     try {
@@ -59,4 +83,4 @@ async function fazerUpdateAgendaValida(id) {
     }
 }
 
-module.exports = { fazerupadate_date , fazerPostagenda, fazerUpdateAgendaValida};
+module.exports = { fazerupadate_date , fazerUpdateAgendaValida};

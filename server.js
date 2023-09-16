@@ -149,6 +149,42 @@ app.get('/all-remedio', async (req, res) => {
     }
 });
 
+app.patch('/editar-agenda-final:id', async (req, res) => {
+  const id = req.params.id
+  const {
+    Medicamento,
+    Receita,
+    Descrição,
+    Valida
+} = req.body;
+
+try {
+
+    const editadAgenda = {
+        medicamento: Medicamento,
+        receita: Receita,
+        descrição: Descrição,
+        valida: Valida
+    };
+        await client.connect();
+        
+        const atualizaagenda = await agendaCollection.updateOne(
+            {_id: new ObjectId(id)},
+            {$set:editadAgenda}
+        )
+        if(atualizaagenda.modifiedCount > 0){
+            res.status(200).json({message: 'Dados Atualizados'});
+        }else{
+            res.status(404).json({message: 'Nenhum documento encontrado'});
+        }
+
+        await client.close();
+    }catch (error){
+        console.error(error);
+        res.status(500).json({erro: 'ocorreu um erro'});
+    }
+
+});
 
 app.post('/criaragenda', async (req, res) => {
     const {
