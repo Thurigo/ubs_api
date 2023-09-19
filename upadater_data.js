@@ -24,12 +24,12 @@ async function agendarChamadaAxios() {
 
 
    for (const element of agenda) {
-    if (Date.parse(element.data) < dateNow && element.valida == true) {
+    if (Date.parse(element.data) < dateNow && element.valida ==  true) {
      // console.log(Date.parse(element.data));
        const result = await test.fazerUpdateAgendaValida(element._id);
       console.log(result);
     } else {
-      console.log('Data valida');
+      console.log('Data invalida');
     }
   
     const dataElement = new Date(element.data);
