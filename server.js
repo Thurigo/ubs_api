@@ -2,8 +2,15 @@ const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+require('dotenv').config();
 
-const uri = 'mongodb+srv://ubs:1234@ubs-cluster.lvn4rik.mongodb.net/?retryWrites=true&w=majority'; 
+
+
+const uri = process.env.mongo_ulr_key;
+
+
+
+
 const client = new MongoClient(uri, {
     serverApi: {
         version: ServerApiVersion.v1,
@@ -256,4 +263,5 @@ app.post('/criaragenda', async (req, res) => {
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
+    
 });
