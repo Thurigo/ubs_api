@@ -6,7 +6,8 @@ require('dotenv').config();
 
 
 
-const uri = process.env.mongo_ulr_key;
+// const uri = process.env.mongo_ulr_key;
+const uri = "mongodb+srv://ubs:1234@ubs-cluster.lvn4rik.mongodb.net/?retryWrites=true&w=majority"
 
 
 
